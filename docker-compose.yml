@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  ffmpeg-nvenc:
+    build: .
+    runtime: nvidia
+    volumes:
+      - ./input:/root/input
+      - ./output:/root/output
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
+    restart: unless-stopped
