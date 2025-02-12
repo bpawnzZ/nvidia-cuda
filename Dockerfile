@@ -23,6 +23,19 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     yasm \
     nasm \
+    libtool \
+    autoconf \
+    automake \
+    libva-dev \
+    libvdpau-dev \
+    libxcb-shm0-dev \
+    libxcb-xfixes0-dev \
+    libxcb-shape0-dev \
+    libxcb1-dev \
+    libx11-dev \
+    libxv-dev \
+    libxext-dev \
+    zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install FFmpeg with NVIDIA support
