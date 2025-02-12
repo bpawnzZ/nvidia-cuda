@@ -38,10 +38,15 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install FFmpeg with NVIDIA support from pre-built binaries
+# Install FFmpeg with NVIDIA support
 RUN apt-get update && apt-get install -y \
     ffmpeg \
-    libnpp-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install NVIDIA NPP library from CUDA toolkit
+RUN apt-get update && apt-get install -y \
+    libnpp-12-2 \
+    libnpp-dev-12-2 \
     && rm -rf /var/lib/apt/lists/*
 
 # Verify FFmpeg installation with NVIDIA support
