@@ -38,29 +38,16 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install FFmpeg with NVIDIA support
-RUN git clone https://git.ffmpeg.org/ffmpeg.git /tmp/ffmpeg && \
-    cd /tmp/ffmpeg && \
-    ./configure \
-        --enable-nonfree \
-        --enable-cuda-nvcc \
-        --enable-libnpp \
-        --enable-gpl \
-        --enable-libx264 \
-        --enable-libx265 \
-        --enable-libfdk-aac \
-        --enable-libmp3lame \
-        --enable-libopus \
-        --enable-libvpx \
-        --enable-libass \
-        --enable-nvenc \
-        --enable-cuvid \
-        --extra-cflags=-I/usr/local/cuda/include \
-        --extra-ldflags=-L/usr/local/cuda/lib64 && \
-    make -j$(nproc) && \
-    make install && \
-    ldconfig && \
-    rm -rf /tmp/ffmpeg
+# Install FFmpeg with NVIDIA support from pre-built binaries
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    libnpp-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Verify FFmpeg installation with NVIDIA support
+RUN ffmpeg -version && \
+    ffmpeg -hwaccels | grep cuda && \
+    ffmpeg -codecs | grep nvenc
 
 # Create working directories
 RUN mkdir -p /root/input /root/output
