@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.2.2-devel-ubuntu22.04
+FROM nvidia/cuda:12.0.1-devel-ubuntu22.04
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -45,8 +45,8 @@ RUN apt-get update && apt-get install -y \
 
 # Install NVIDIA NPP library from CUDA toolkit
 RUN apt-get update && apt-get install -y \
-    libnpp-12-2 \
-    libnpp-dev-12-2 \
+    libnpp-12-0 \
+    libnpp-dev-12-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Verify FFmpeg installation with NVIDIA support
